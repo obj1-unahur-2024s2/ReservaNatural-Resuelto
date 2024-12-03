@@ -1,0 +1,41 @@
+import animales.*
+
+describe "Test básico de animales" {
+  const ciervo = new Ciervo()
+  const felino = new Felino(peso=70, ferocidad= 50)
+  const averapaz = new Ave(altura=30)
+  const ciervoMontana = new CiervoDeMontana(nivelAlterta=15)
+  const felinodManchas = new FelinoDeManchas(peso=80, ferocidad= 60, manchas=29)
+
+    test "Un ciervo enfrenta una amenaza entonces su nivel de alerta pasa a 40 y su nivel de energía se recalcula a 80" {
+        ciervo.amenaza()
+        assert.equals(40, ciervo.nivelAlerta())
+        assert.equals(80, ciervo.nivelEnergia())
+    }
+
+
+    test "Un felino de peso 70 kg y su ferocidad es 50 enfrentra una amenaza entonces  su nivel de energia pasa 25 y su peso pasa a 90 kg" {
+        felino.amenaza()
+        assert.equals(90, felino.peso())
+        assert.equals(25, felino.nivelEnergia())
+    }
+
+    test "Un aver rapaz que vuela a altura de 30 metros enfrenta una amenaza entonces su y la altura de vuelo llega a 80 y nivel de energía pasa a 240 unidades" {
+        averapaz.amenaza()
+        assert.equals(80, averapaz.altura())
+        assert.equals(240, averapaz.nivelEnergia())
+    }
+
+    test "Un ciervo con un niveld de alerta de 15 enfrenta una amenaza entonces su nivel de alerta pasa a 30 y su nivel de energía es 315"{
+        ciervoMontana.amenaza()
+        assert.equals(30, ciervoMontana.nivelAlerta())
+        assert.equals(315, ciervoMontana.nivelEnergia())       
+    }
+
+    test "Un felino de machas de peso 80 kg, ferocidad es 60 y 29 machas enfrenta una amenaza suma manchas aumentan a 30 y  su nivel de energía pasa 90" {
+        felinodManchas.amenaza()
+        assert.equals(30, felinodManchas.manchas())
+        assert.equals(90, felinodManchas.nivelEnergia())
+    }
+
+}

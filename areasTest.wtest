@@ -1,0 +1,37 @@
+import areas.*
+import animales.* 
+
+describe "Test de area" {
+    const ciervo = new Ciervo()
+    const felino = new Felino(peso=70, ferocidad= 50)
+    const averapaz = new Ave(altura=30)
+    const ciervoMontana = new CiervoDeMontana(nivelAlterta=15)
+    const felinodManchas = new FelinoDeManchas(peso=80, ferocidad= 60, manchas=29)
+    const area = new Area(agua=1000, refugio= 215)
+
+    method initialize() {
+        area.agregarAnimales([ciervo, felino, averapaz, ciervoMontana, felinodManchas])
+    } 
+    test "Incendio, debilidad y vigoroso" {
+        reserva.debilidadComun(250)
+        area.incendio()
+        assert.equals([ciervo, felino, averapaz, felinodManchas],area.debiles())
+        assert.equals(ciervoMontana, area.vigoroso())
+        assert.equals(900, area.agua())
+        assert.equals(435, area.valorEnergeticoDebil())
+    }
+    test "Simular el modo recuperacion, pasa a no estar habitable" {
+        area.modoRecuperacion()
+        assert.notThat(area.esHabitable())
+        assert.equals( 992, area.agua())
+        assert.equals( 199, area.refugio())
+    }
+
+    test "Equilibrio" {
+        averapaz.amenaza()
+        averapaz.amenaza()   
+        assert.notThat(area.enEquilibrio())
+        assert.that(area.esHabitable())
+        assert.notThat(area.todosSatisfechos())
+    }
+}
